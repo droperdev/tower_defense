@@ -16,11 +16,16 @@ public class ButtonTower : MonoBehaviour
     {
         if (GameManager.inst.playerObject.GetCoin() < prefab.GetComponent<Tower>().towerObject.buyPrice)
         {
-            button.enabled = false;
+         /*    ColorBlock colors = button.colors;
+            colors.disabledColor = disabledColor;
+            button.colors  = colors; */
+            button.interactable = false;
+            //button.enabled = false;
         }
         else
         {
-            button.enabled = true;
+            button.interactable = true;
+            //button.enabled = true;
         }
 
 

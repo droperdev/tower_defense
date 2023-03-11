@@ -483,15 +483,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4e7951376b968478d906ca6af07570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyObject:
+    movementSpeed: 1.1
+    rotationSpeed: 10
+    isDead: 0
+    maxLife: 7
+    currentLife: 0
   waypoints: []
-  movementSpeed: 1
-  rotationSpeed: 10
-  isDead: 0
-  maxLife: 40
-  currentLife: 0
   fillLifeImage: {fileID: 956666201019781571}
-  damage: 15
-  coin: 30
+  damage: 2
+  coin: 2
+  timeFrozen: 3.5
+  timeRemaining: 2.75
 --- !u!95 &956666200000150069
 Animator:
   serializedVersion: 5

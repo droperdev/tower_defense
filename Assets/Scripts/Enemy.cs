@@ -5,23 +5,24 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    public EnemyObject enemyObject;
+
     [Header("Movement")]
     [HideInInspector] public List<Transform> waypoints = new List<Transform>();
     private int targetIndex = 1;
-    public float movementSpeed = 4;
-    public float rotationSpeed = 6;
+    
     private Animator anim;
 
-    [Header("Life")]
-    public bool isDead;
-    public float maxLife = 100;
-    public float currentLife = 0;
+   
     public Image fillLifeImage;
     private Transform canvasRoot;
     private Quaternion initLifeRotation;
 
     public int damage = 5;
     public int coin = 10;
+
+    private bool isFrozen = false;
+    private bool isBurn = false;
 
     void Awake()
     {
@@ -34,21 +35,15 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        currentLife = maxLife;
+        enemyObject.currentLife = enemyObject.maxLife;
     }
 
     // Update is called once per frame
     void Update()
     {
-      
         canvasRoot.transform.rotation = initLifeRotation;
         Movement();
         LookAt();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(10);
-        }
     }
     private void SetWaypoints()
     {
@@ -63,11 +58,11 @@ public class Enemy : MonoBehaviour
     #region Movement &Rotations
     private void Movement()
     {
-        if (isDead)
+        if (enemyObject.isDead)
         {
             return;
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[targetIndex].position, movementSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[targetIndex].position, enemyObject.movementSpeed * Time.deltaTime);
         var distance = Vector3.Distance(transform.position, waypoints[targetIndex].position);
         if (distance <= 0.1f)
         {
@@ -88,15 +83,15 @@ public class Enemy : MonoBehaviour
 
         var dir = waypoints[targetIndex].position - transform.position;
         var rootTarget = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rootTarget, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rootTarget, enemyObject.rotationSpeed * Time.deltaTime);
     }
 
     #endregion
 
     public void TakeDamage(float damage)
     {
-        var newLife = currentLife - damage;
-        if (isDead)
+        var newLife = enemyObject.currentLife - damage;
+        if (enemyObject.isDead)
         {
             return;
         }
@@ -105,17 +100,84 @@ public class Enemy : MonoBehaviour
             OnDead();
         }
 
-        currentLife = newLife;
-        var fillValue = currentLife * 1 / maxLife;
+        enemyObject.currentLife = newLife;
+        var fillValue = enemyObject.currentLife * 1 / enemyObject.maxLife;
         fillLifeImage.fillAmount = fillValue;
         //StartCoroutine(AnimationDamage());
     }
 
+    public void Freeze()
+    {
+        if (!isFrozen)
+        {
+            isFrozen = true;
+            StartCoroutine(Defrost());
+        }
+        else
+        {
+            timeFrozen = 3.0f;
+        }
+    }
+
+    public float timeFrozen = 3.0f;
+    IEnumerator Defrost()
+    {
+        float newMovementSpeed = enemyObject.movementSpeed / 2;
+        float nextFreezeTick = Time.time + 0.1f;
+        while (timeFrozen > 0.0f)
+        {
+            if (Time.time > nextFreezeTick)
+            {
+                enemyObject.movementSpeed = newMovementSpeed;
+                nextFreezeTick += 0.1f;
+            }
+
+            yield return null;
+            timeFrozen -= Time.deltaTime;
+        }
+
+        enemyObject.movementSpeed = newMovementSpeed * 2;
+        isFrozen = false;
+        timeFrozen = 3.0f;
+    }
+
+    public float timeRemaining = 3.0f;
+    public void Burn()
+    {
+        if (!isBurn)
+        {
+            isBurn = true;
+            StartCoroutine(StopBurning());
+        }
+        else
+        {
+            this.timeRemaining = 3.0f;
+        }
+    }
+
+    IEnumerator StopBurning()
+    {
+        float nextBurnTick = Time.time + 0.1f;
+        while (timeRemaining > 0.0f)
+        {
+            if (Time.time > nextBurnTick)
+            {
+                TakeDamage(0.25f);
+                nextBurnTick += 0.5f;
+            }
+
+            yield return null;
+            timeRemaining -= Time.deltaTime;
+        }
+        isBurn = false;
+        timeRemaining = 3.0f;
+    }
+
     private void OnDead()
     {
-        isDead = true;
+        enemyObject.isDead = true;
         anim.SetBool("IsDead", true);
-        currentLife = 0;
+        enemyObject.currentLife = 0;
         fillLifeImage.fillAmount = 0;
         GameManager.inst.playerObject.AddCoin(coin);
         StartCoroutine(OnDeadEffect());
@@ -140,8 +202,20 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
         Destroy(gameObject);
-       
+
     }
 
+}
 
+[System.Serializable]
+public class EnemyObject
+{
+    public float movementSpeed = 4;
+    public float rotationSpeed = 6;
+
+    [Header("Life")]
+    public bool isDead;
+    public float maxLife = 100;
+    public float currentLife = 0;
+    
 }

@@ -146,7 +146,7 @@ MonoBehaviour:
   towerObject:
     towerName: Tower Normal
     towerDescription: Tower Normal
-    buyPrice: 100
+    buyPrice: 10
     sellPrice: 25
-    attackRadius: 2
-    attackInterval: 1
+    attackRadius: 1
+    attackInterval: 0.5

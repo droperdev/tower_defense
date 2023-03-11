@@ -146,7 +146,7 @@ MonoBehaviour:
   towerObject:
     towerName: Tower Cold
     towerDescription: Tower Cold
-    buyPrice: 250
+    buyPrice: 25
     sellPrice: 75
-    attackRadius: 5
-    attackInterval: 0.25
+    attackRadius: 1
+    attackInterval: 0.5

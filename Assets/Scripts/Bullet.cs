@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 5;
-
+    public BulletObject bulletObject;
     public Vector3 target;
 
     public void SetTarget(Vector3 targetPosition){
@@ -18,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, bulletObject.speed * Time.deltaTime);
 
       
         if (transform.position == target)
@@ -32,9 +30,26 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {   
             Enemy enemy = other.GetComponent<Enemy>();
-            enemy.TakeDamage(damage);
+            switch(gameObject.tag){
+                case "ColdBullet":
+                    enemy.Freeze();
+                    break;
+                case "FireBullet":
+                    enemy.Burn();
+                    break;
+                default:
+                    enemy.TakeDamage(bulletObject.damage);
+                    break;
+
+            }
+           
             Destroy(gameObject);
         }
     }
+}
 
+[System.Serializable]
+public class BulletObject {
+    public float speed = 10f;
+    public float damage = 5;
 }

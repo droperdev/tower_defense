@@ -146,7 +146,7 @@ MonoBehaviour:
   towerObject:
     towerName: Tower Fire
     towerDescription: Tower Fire
-    buyPrice: 150
+    buyPrice: 15
     sellPrice: 50
-    attackRadius: 3
+    attackRadius: 1
     attackInterval: 0.5

@@ -7,6 +7,8 @@ TagManager:
   - Tower
   - Enemy
   - AllowedNode
+  - ColdBullet
+  - FireBullet
   layers:
   - Default
   - TransparentFX

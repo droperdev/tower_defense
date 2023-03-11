@@ -145,7 +145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 62.4, y: 24.03, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.3519292}
+  m_AnchoredPosition: {x: 0, y: 0.717}
   m_SizeDelta: {x: 1, y: 0.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &956666200965091822
@@ -245,7 +245,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 0.36}
+  m_SizeDelta: {x: 0.98, y: 0.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &956666201019781570
 CanvasRenderer:
@@ -411,8 +411,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2569835367970663037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7796211, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: -2.0242693, y: 0.7796211, z: 0.99106956}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 956666201248334376}
@@ -428,7 +428,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2569835367970663037}
-  m_Mesh: {fileID: -2432090755550338912, guid: 6af486569e5611b4797b4f864e74a45c, type: 3}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2569835367970663039
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -483,15 +483,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4e7951376b968478d906ca6af07570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyObject:
+    movementSpeed: 1
+    rotationSpeed: 10
+    isDead: 0
+    maxLife: 5
+    currentLife: 0
   waypoints: []
-  movementSpeed: 1
-  rotationSpeed: 10
-  isDead: 0
-  maxLife: 10
-  currentLife: 0
   fillLifeImage: {fileID: 956666201019781571}
-  damage: 15
-  coin: 15
+  damage: 1
+  coin: 1
+  timeFrozen: 4
+  timeRemaining: 3
 --- !u!95 &956666200000150069
 Animator:
   serializedVersion: 5

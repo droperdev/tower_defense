@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3176826283043594086}
   m_Layer: 0
   m_Name: Bullet Cold
-  m_TagString: Untagged
+  m_TagString: ColdBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,8 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7192de27b66319419b4bbe1ae869d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  damage: 50
+  bulletObject:
+    speed: 10
+    damage: 0.5
   target: {x: 0, y: 0, z: 0}
 --- !u!54 &-3176826283043594086
 Rigidbody:

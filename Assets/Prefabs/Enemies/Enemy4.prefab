@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6868641564873656973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0242693, y: 0.7796211, z: 0.99106956}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8195830511325733592}
@@ -101,15 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4e7951376b968478d906ca6af07570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyObject:
+    movementSpeed: 1.3
+    rotationSpeed: 10
+    isDead: 0
+    maxLife: 25
+    currentLife: 0
   waypoints: []
-  movementSpeed: 1.8
-  rotationSpeed: 10
-  isDead: 0
-  maxLife: 3000
-  currentLife: 0
   fillLifeImage: {fileID: 8195830510414426419}
-  damage: 30
-  coin: 100
+  damage: 5
+  coin: 5
+  timeFrozen: 2.5
+  timeRemaining: 2.25
 --- !u!95 &8195830511533742789
 Animator:
   serializedVersion: 5

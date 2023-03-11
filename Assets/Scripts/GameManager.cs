@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -33,6 +34,12 @@ public class GameManager : MonoBehaviour
         lifeText.text = "Lifes: " + playerObject.Life.ToString("00");
         coinText.text = "Coins: " + playerObject.Coins.ToString("00");
         keyText.text = "Keys: " + playerObject.Keys.ToString("00");
+    }
+
+    public void ExitGame()
+    {   
+        print("salir del juego");
+        Application.Quit();
     }
 
 }

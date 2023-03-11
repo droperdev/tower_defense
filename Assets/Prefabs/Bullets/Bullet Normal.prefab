@@ -111,8 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7192de27b66319419b4bbe1ae869d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  damage: 10
+  bulletObject:
+    speed: 10
+    damage: 1
   target: {x: 0, y: 0, z: 0}
 --- !u!54 &-6894291101392989561
 Rigidbody:

@@ -33,7 +33,7 @@ public class Tower : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             Enemy enemy = collider.GetComponent<Enemy>();
-            if (collider.CompareTag("Enemy") && !enemy.isDead)
+            if (collider.CompareTag("Enemy") && !enemy.enemyObject.isDead)
             {
                 GameObject bulletObject = Instantiate(bulletPrefab, transform.GetChild(0).position, Quaternion.identity);
                 Bullet bullet = bulletObject.GetComponent<Bullet>();

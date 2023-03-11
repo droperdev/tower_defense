@@ -12,7 +12,6 @@ public class WaveManager : MonoBehaviour
     public int currentWave;
     public Transform initPosition;
     
-    public TextMeshProUGUI counterText;
     public GameObject buttonNextWave;
 
     void Start()
@@ -24,7 +23,7 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         CheckCounterAndShowButton();
-        checkCounterForNextWave();
+        //checkCounterForNextWave();
     }
 
     private void checkCounterForNextWave()
@@ -32,7 +31,7 @@ public class WaveManager : MonoBehaviour
         if(isWaitingForNextWave && !wavesFinish)
         {
             waves[currentWave].counterToNextWave -= 1 * Time.deltaTime;
-            counterText.text = waves[currentWave].counterToNextWave.ToString("00");
+            //counterText.text = waves[currentWave].counterToNextWave.ToString("00");
             if(waves[currentWave].counterToNextWave <= 0)
             {
                 ChangeWave();
@@ -68,7 +67,6 @@ public class WaveManager : MonoBehaviour
         if(!wavesFinish)
         {
             buttonNextWave.SetActive(isWaitingForNextWave);
-            counterText.gameObject.SetActive(isWaitingForNextWave);
         }
     }
 
